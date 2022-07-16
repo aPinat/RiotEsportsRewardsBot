@@ -1,109 +1,27 @@
-﻿using Newtonsoft.Json;
+﻿// ReSharper disable once CheckNamespace
 
 namespace RiotEsportsRewardsBot.EventDetailsData;
 
-public class EventDetailsData
-{
-    [JsonProperty("data")] public Data? Data { get; set; }
-}
+public record EventDetailsData(Data? Data);
 
-public class Data
-{
-    [JsonProperty("event")] public Event? Event { get; set; }
-}
+public record Data(Event? Event);
 
-public class Event
-{
-    [JsonProperty("id")] public string? Id { get; set; }
+public record Event(string? Id, string? Type, Tournament? Tournament, League? League, Match? Match, List<Stream>? Streams);
 
-    [JsonProperty("type")] public string? Type { get; set; }
+public record League(string? Id, string? Slug, Uri? Image, string? Name);
 
-    [JsonProperty("tournament")] public Tournament? Tournament { get; set; }
+public record Match(Strategy? Strategy, List<MatchTeam>? Teams, List<Game>? Games);
 
-    [JsonProperty("league")] public League? League { get; set; }
+public record Game(long? Number, string? Id, string? State, List<GameTeam>? Teams, List<object>? Vods);
 
-    [JsonProperty("match")] public Match? Match { get; set; }
+public record GameTeam(string? Id, string? Side);
 
-    [JsonProperty("streams")] public List<Stream>? Streams { get; set; }
-}
+public record Strategy(long? Count);
 
-public class League
-{
-    [JsonProperty("id")] public string? Id { get; set; }
+public record MatchTeam(string? Id, string? Name, string? Code, Uri? Image, Result? Result);
 
-    [JsonProperty("slug")] public string? Slug { get; set; }
+public record Result(long? GameWins);
 
-    [JsonProperty("image")] public Uri? Image { get; set; }
+public record Stream(string? Parameter, string? Locale, string? Provider, List<string>? Countries, long? Offset);
 
-    [JsonProperty("name")] public string? Name { get; set; }
-}
-
-public class Match
-{
-    [JsonProperty("strategy")] public Strategy? Strategy { get; set; }
-
-    [JsonProperty("teams")] public List<MatchTeam>? Teams { get; set; }
-
-    [JsonProperty("games")] public List<Game>? Games { get; set; }
-}
-
-public class Game
-{
-    [JsonProperty("number")] public long? Number { get; set; }
-
-    [JsonProperty("id")] public string? Id { get; set; }
-
-    [JsonProperty("state")] public string? State { get; set; }
-
-    [JsonProperty("teams")] public List<GameTeam>? Teams { get; set; }
-
-    [JsonProperty("vods")] public List<object>? Vods { get; set; }
-}
-
-public class GameTeam
-{
-    [JsonProperty("id")] public string? Id { get; set; }
-
-    [JsonProperty("side")] public string? Side { get; set; }
-}
-
-public class Strategy
-{
-    [JsonProperty("count")] public long? Count { get; set; }
-}
-
-public class MatchTeam
-{
-    [JsonProperty("id")] public string? Id { get; set; }
-
-    [JsonProperty("name")] public string? Name { get; set; }
-
-    [JsonProperty("code")] public string? Code { get; set; }
-
-    [JsonProperty("image")] public Uri? Image { get; set; }
-
-    [JsonProperty("result")] public Result? Result { get; set; }
-}
-
-public class Result
-{
-    [JsonProperty("gameWins")] public long? GameWins { get; set; }
-}
-
-public class Stream
-{
-    [JsonProperty("parameter")] public string? Parameter { get; set; }
-
-    [JsonProperty("locale")] public string? Locale { get; set; }
-
-    [JsonProperty("provider")] public string? Provider { get; set; }
-
-    [JsonProperty("countries")] public List<string>? Countries { get; set; }
-
-    [JsonProperty("offset")] public long? Offset { get; set; }
-}
-
-public class Tournament
-{
-    [JsonProperty("id")] public string? Id { get; set; }
-}
+public record Tournament(string? Id);
