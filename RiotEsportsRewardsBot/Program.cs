@@ -5,6 +5,7 @@ using RiotEsportsRewardsBot.LiveData;
 
 var riotXApiKey = Environment.GetEnvironmentVariable("RIOT_X_API_KEY") ?? throw new ApplicationException("RIOT_X_API_KEY missing.");
 var riotAccessToken = Environment.GetEnvironmentVariable("RIOT_ACCESS_TOKEN") ?? throw new ApplicationException("RIOT_ACCESS_TOKEN missing.");
+var hlTag = Environment.GetEnvironmentVariable("HL_TAG") ?? throw new ApplicationException("HL_TAG missing.");
 
 var esports = new HttpClient();
 esports.DefaultRequestHeaders.TryAddWithoutValidation("x-api-key", riotXApiKey);
@@ -15,7 +16,7 @@ while (true)
 {
     try
     {
-        var livedata = await esports.GetFromJsonAsync<LiveData>("https://esports-api.lolesports.com/persisted/gw/getLive?hl=en-GB");
+        var livedata = await esports.GetFromJsonAsync<LiveData>($"https://esports-api.lolesports.com/persisted/gw/getLive?hl={hlTag}");
         if (livedata?.Data?.Schedule?.Events == null)
             goto END;
 
