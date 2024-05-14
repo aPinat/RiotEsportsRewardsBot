@@ -12,7 +12,7 @@ RUN dotnet build -c Release --no-restore
 FROM build AS publish
 RUN dotnet publish -c Release --no-build -o /app
 
-FROM mcr.microsoft.com/dotnet/runtime:8.0.4@sha256:311428ed4571680aee6067c43ee5d0e45a15eb0b2e599fe30ea07d7de4ecc53c
+FROM mcr.microsoft.com/dotnet/runtime:8.0.5@sha256:af08db0ca73b3e113ddbee56d0a3414896023f78ef0ff6eb454b85a2ddc7e2f8
 WORKDIR /app
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "RiotEsportsRewardsBot.dll"]
