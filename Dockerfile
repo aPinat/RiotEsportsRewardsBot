@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:8.0.403@sha256:ff705b99a06144190e2638f8ede64a753915df5ea27fff55f58d0eb5f7054b0b AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0.403@sha256:cab0284cce7bc26d41055d0ac5859a69a8b75d9a201cd226999f4f00cc983f13 AS build
 WORKDIR /src
 
 COPY ["*.sln", "."]
